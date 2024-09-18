@@ -1,0 +1,23 @@
+python -m torch.distributed.run --nproc_per_node=2 --master_port=12353 \
+  train_dist.py \
+  --live_weight 0.8 \
+  --train_root '/home/thainq97/dev/cvpr2024-face-anti-spoofing-challenge/DATASET/Data_FAS_v0' \
+  --train_list '/home/thainq97/dev/cvpr2024-face-anti-spoofing-challenge/DATASET/Data_FAS_v0/train_1508.txt' \
+  --val_root   '/home/thainq97/dev/cvpr2024-face-anti-spoofing-challenge/DATASET/Data_FAS_v0' \
+  --val_list   '/home/thainq97/dev/cvpr2024-face-anti-spoofing-challenge/DATASET/Data_FAS_v0/val.txt' \
+  --cos \
+  --syncbn \
+  --arch resnet50 \
+  --num_classes 2 \
+  --input_size 224 \
+  --batch_size 384 \
+  --workers 64 \
+  --optimizer AdamW \
+  --learning_rate 0.001 \
+  --weight_decay 0.0005 \
+  --epochs 30 \
+  --print_freq 20 \
+  --save_freq 5 \
+  --pretrain './pretrained/p1_resnet50_epoch199.pth' \
+  --saved_model_dir './outputs_1508_v2' \
+  --single_center_loss
